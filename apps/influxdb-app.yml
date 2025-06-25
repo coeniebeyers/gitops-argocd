@@ -9,7 +9,7 @@ spec:
   project: default
   sources:
     - repoURL: 'https://helm.influxdata.com/'
-      chart: influxdata
+      chart: influxdata/influxdb
       targetRevision: "4.12.5"
       helm:
         valueFiles:
