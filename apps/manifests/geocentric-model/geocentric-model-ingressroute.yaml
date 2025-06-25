@@ -1,0 +1,14 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: geocentric-model-ingress
+  namespace: geocentric
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`geocentric.local.cluster`)
+      kind: Rule
+      services:
+        - name: geocentric-model-svc
+          port: 80
