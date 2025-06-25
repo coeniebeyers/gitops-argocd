@@ -11,5 +11,4 @@ spec:
       kind: Rule
       services:
         - name: longhorn-frontend
-          port: 8010
-          targetPort: 80
+          port: 80
