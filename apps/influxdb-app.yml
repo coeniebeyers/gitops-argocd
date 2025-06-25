@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: influxdb
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: 'https://helm.influxdata.com/'
+      chart: influxdata
+      targetRevision: 1.8.10
+      helm:
+        valueFiles:
+          - $values/apps/manifests/influxdb/values.yaml
+    - repoURL: 'https://github.com/coeniebeyers/gitops-argocd'
+      targetRevision: HEAD
+      ref: values
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: longhorn-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
