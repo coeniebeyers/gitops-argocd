@@ -10,7 +10,7 @@ spec:
   sources:
     - repoURL: 'https://helm.influxdata.com/'
       chart: influxdata
-      targetRevision: 1.8.10
+      targetRevision: 1.8
       helm:
         valueFiles:
           - $values/apps/manifests/influxdb/values.yaml
