@@ -6,17 +6,17 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  syncPolicy:
-    syncOptions:
-      - CreateNamespace=true
-
   project: default
-
   source:
     repoURL: https://github.com/coeniebeyers/gitops-argocd/
     targetRevision: HEAD
     path: ./apps/manifests/longhorn  
-
   destination:
     server: https://kubernetes.default.svc
     namespace: longhorn-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

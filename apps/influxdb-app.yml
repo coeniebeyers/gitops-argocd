@@ -7,18 +7,12 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
-  sources:
-    - repoURL: 'https://helm.influxdata.com/'
-      chart: influxdata/influxdb
-      targetRevision: 1.8.10
-      helm:
-        valueFiles:
-          - $values/apps/manifests/influxdb/values.yaml
-    - repoURL: 'https://github.com/coeniebeyers/gitops-argocd'
-      targetRevision: HEAD
-      ref: values
+  source:
+    repoURL: https://github.com/coeniebeyers/gitops-argocd/
+    targetRevision: HEAD
+    path: ./apps/manifests/influxdb  
   destination:
-    server: 'https://kubernetes.default.svc'
+    server: https://kubernetes.default.svc
     namespace: influxdb
   syncPolicy:
     automated:
