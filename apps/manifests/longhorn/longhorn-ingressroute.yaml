@@ -7,8 +7,8 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`k3s.cluster`)
+    - match: Host(`longhorn.local.cluster`)
       kind: Rule
       services:
         - name: longhorn-frontend
-          port: 8010
+          port: 80
