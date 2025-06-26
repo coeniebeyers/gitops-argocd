@@ -6,8 +6,9 @@ metadata:
 spec:
   entryPoints:
     - web
+    - websecure
   routes:
-    - match: Host(`longhorn.local.cluster`)
+    - match: Host(`longhorn.lan`)
       kind: Rule
       services:
         - name: longhorn-frontend
