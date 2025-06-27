@@ -13,9 +13,6 @@ spec:
       labels:
         app: prometheus-server
     spec:
-      securityContext:
-        runAsUser: 65534
-        runAsGroup: 65534
       containers:
         - name: prometheus
           image: prom/prometheus
@@ -24,28 +21,8 @@ spec:
           volumeMounts:
             - name: config-volume
               mountPath: /etc/prometheus
-            - name: prometheus-data
-              mountPath: /prometheus
       volumes:
         - name: config-volume
           configMap:
             name: prometheus-server-conf
             defaultMode: 420
-        - name: prometheus-data
-          persistentVolumeClaim:
-            claimName: prometheus-pvc  
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  labels:
-    app: prometheus-server
-  name: prometheus-pvc
-  namespace: prometheus
-spec:
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: 10Gi
-  storageClassName: longhorn
